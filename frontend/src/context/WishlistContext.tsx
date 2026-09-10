@@ -1,18 +1,9 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import api from '../services/api';
 import type { WishlistItem } from '../types/movie';
-
-type WishlistContextShape = {
-  wishlist: WishlistItem[];
-  isLoading: boolean;
-  addToWishlist: (movie: { movieId: number; title: string; posterPath?: string | null; releaseDate?: string | null; rating?: number | null }) => Promise<void>;
-  removeFromWishlist: (movieId: number) => Promise<void>;
-  isInWishlist: (movieId: number) => boolean;
-  refreshWishlist: () => Promise<void>;
-};
-
-const WishlistContext = createContext<WishlistContextShape | undefined>(undefined);
+import { WishlistContext } from './WishlistContextDefinition';
+import type { WishlistContextShape } from './WishlistContextDefinition';
 
 const getUserId = () => {
   let userId = localStorage.getItem('cinescope-user-id');
@@ -24,7 +15,6 @@ const getUserId = () => {
 
   return userId;
 };
-
 export const WishlistProvider = ({ children }: { children: React.ReactNode }) => {
   const [wishlist, setWishlist] = useState<WishlistItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -44,6 +34,8 @@ export const WishlistProvider = ({ children }: { children: React.ReactNode }) =>
 
   useEffect(() => {
     getUserId();
+    // The initial API refresh intentionally updates loading and wishlist state.
+    // oxlint-disable-next-line react/set-state-in-effect
     void refreshWishlist();
   }, [refreshWishlist]);
 
@@ -79,14 +71,4 @@ export const WishlistProvider = ({ children }: { children: React.ReactNode }) =>
   }), [wishlist, isLoading, addToWishlist, removeFromWishlist, isInWishlist, refreshWishlist]);
 
   return <WishlistContext.Provider value={value}>{children}</WishlistContext.Provider>;
-};
-
-export const useWishlist = () => {
-  const context = useContext(WishlistContext);
-
-  if (!context) {
-    throw new Error('useWishlist must be used within WishlistProvider');
-  }
-
-  return context;
 };

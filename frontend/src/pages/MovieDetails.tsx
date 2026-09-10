@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Bookmark, Clock3, Globe, Star } from 'lucide-react';
 
-import { useWishlist } from '../context/WishlistContext';
+import { useWishlist } from '../context/useWishlist';
 import api from '../services/api';
 import type { Movie } from '../types/movie';
 

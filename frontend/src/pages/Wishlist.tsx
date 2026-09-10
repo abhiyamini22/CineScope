@@ -1,4 +1,4 @@
-import { useWishlist } from '../context/WishlistContext';
+import { useWishlist } from '../context/useWishlist';
 import { Link } from 'react-router-dom';
 
 const WishlistPage = () => {

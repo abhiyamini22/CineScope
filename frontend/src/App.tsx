@@ -1,7 +1,8 @@
 import { BrowserRouter, Navigate, NavLink, Route, Routes } from 'react-router-dom';
 import { Heart, Home, Search, Sparkles } from 'lucide-react';
 
-import { WishlistProvider, useWishlist } from './context/WishlistContext';
+import { WishlistProvider } from './context/WishlistContext';
+import { useWishlist } from './context/useWishlist';
 import HomePage from './pages/Home';
 import SearchPage from './pages/Search';
 import MovieDetailsPage from './pages/MovieDetails';

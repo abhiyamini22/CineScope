@@ -190,6 +190,23 @@ cd backend
 npm run dev
 ```
 
+## Demo flow
+1. Open `http://localhost:5173`.
+2. Show the Discover page and explain that the frontend calls the backend, not TMDB directly.
+3. Change the genre, year, rating, and sort controls to demonstrate server-side discovery parameters.
+4. Open a movie details page and add the movie to the wishlist.
+5. Open Wishlist and refresh the page to demonstrate persistence through MongoDB.
+6. Use Search to demonstrate debounced title lookup and pagination.
+
+## Deployment notes
+- Deploy the frontend as a Vite static site and set `VITE_API_BASE_URL` to the deployed backend URL.
+- Deploy the backend as a Node.js service and provide all backend environment variables through the hosting provider's secret configuration.
+- Use a managed MongoDB deployment for production instead of a local database.
+- Restrict `CLIENT_URL` to the deployed frontend origin and keep `TMDB_API_KEY` server-side.
+- Replace the in-memory cache with Redis when running multiple backend instances.
+
+For a local demo, MongoDB must be running before starting the backend. Start the backend and frontend in separate terminals, then open `http://localhost:5173`.
+
 ## Testing
 The project includes backend tests for validation and normalization logic.
 

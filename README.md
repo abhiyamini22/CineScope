@@ -199,7 +199,8 @@ npm run dev
 6. Use Search to demonstrate debounced title lookup and pagination.
 
 ## Deployment notes
-- Deploy the frontend as a Vite static site and set `VITE_API_BASE_URL` to the deployed backend URL.
+- Deploy the frontend as a Vite static site on Vercel. Set the Vercel project root directory to `frontend` and add `VITE_API_BASE_URL` with the deployed backend URL.
+- The frontend includes `frontend/vercel.json` so React Router routes resolve correctly on direct navigation.
 - Deploy the backend as a Node.js service and provide all backend environment variables through the hosting provider's secret configuration.
 - Use a managed MongoDB deployment for production instead of a local database.
 - Restrict `CLIENT_URL` to the deployed frontend origin and keep `TMDB_API_KEY` server-side.
